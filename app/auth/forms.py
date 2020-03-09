@@ -1,12 +1,13 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, BooleanField, SubmitField, FloatField, MultipleFileField, \
-    SelectField
+    SelectField, FileField
 from wtforms.validators import DataRequired, Length, Regexp, EqualTo, Email
 from wtforms import ValidationError
 from ..models import Seller, Media
 
 
 class RegistrationForm(FlaskForm):
+    image = FileField("UPLOAD IMAGE", validators=[DataRequired()])
     name = StringField('Full name', validators=[DataRequired()])
     email = StringField('Email', validators=[DataRequired(), Length(1, 64), Email()])
     username = StringField('Username', validators=[DataRequired(), Length(1, 64), Regexp('^[A-Za-z][A-Za-z0-9_.]*$', 0,

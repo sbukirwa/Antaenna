@@ -37,6 +37,7 @@ class Seller(UserMixin, db.Model):
     __tablename__ = 'sellers'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(64), index=True)
+    image = db.Column(db.LargeBinary, nullable=True)
     username = db.Column(db.String(64), unique=True, index=True)
     email = db.Column(db.String(120), nullable=False)
     password_hash = db.Column(db.String(128))

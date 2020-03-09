@@ -18,11 +18,13 @@ def allowed_file(filename):
 def register():
     form = RegistrationForm()
     if form.validate_on_submit():
-        seller = Seller(name=form.name.data, username=form.username.data, email=form.email.data,
-                        password=form.password_hash.data)
-        db.session.add(seller)
-        db.session.commit()
-        flash("You can now login.")
+        file = request.files['image']
+        if file:
+            seller = Seller(image=file.read(), name=form.name.data, username=form.username.data, email=form.email.data,
+                            password=form.password_hash.data)
+            db.session.add(seller)
+            db.session.commit()
+            flash("You can now login.")
         return redirect(url_for('auth.login'))
     return render_template('auth/register.html', form=form)
 
