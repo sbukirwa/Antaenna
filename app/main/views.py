@@ -22,7 +22,7 @@ def register():
         db.session.commit()
         flash("You can now login.")
         return redirect(url_for('main.login'))
-    return render_template('register.html', form=form)
+    return render_template('register.html', form=form, title="Login")
 
 
 @main.route('/login', methods=["GET", "POST"])
@@ -39,3 +39,10 @@ def login():
         flash("Invalid username or password.")   # write the flash code in the template
     return render_template('login.html', form=form)
 
+
+@main.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    flash("You have been logged out.")
+    return redirect(url_for('auth.login'))

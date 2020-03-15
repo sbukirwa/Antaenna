@@ -5,6 +5,7 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 
 class Config:
     SECRET_KEY = os.environ.get('SECRET_KEY') or 'hard to guess string'
+    UPLOADED_PHOTOS_DEST = os.path.join(basedir, 'app/static/images')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
     @staticmethod

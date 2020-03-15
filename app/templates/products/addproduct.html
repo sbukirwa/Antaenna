@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block navbar %}
+<div class="navbar navbar-inverse" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle"
+                    data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand " href="{{ url_for('auth.home') }}">Antaenna</a>
+        </div>
+            <li class="nav navbar-nav navbar-right">
+{#            <li><a href="{{ url_for('auth.media') }}">Media</a></li>#}
+{#            <li></li>#}
+{#            <li>#}
+{#                {% if current_user.is_authenticated %}#}
+{#                    <li><a href="{{ url_for('auth.logout') }}">Log Out</a></li>#}
+{#                {% endif %}#}
+{#            </li>#}
+            </ul>
+        </div>
+    </div>
+{% endblock %}
+
+{% block page_content %}
+
+     <div class="page-header">
+        <h1>Add Product</h1>
+    {% if current_user.is_authenticated %}
+             {{ current_user.username }}
+{% endif %}!
+{#               <a class="nav-item nav-link" href="{{ url_for('new_post')}}">New Post</a>#}
+{#                <a class="nav-item nav-link" href="{{ url_for('account')}}">Account</a>#}
+{#                <a class="nav-item nav-link" href="{{ url_for('auth.login')}}">Logout</a>#}
+{#              {% else %}#}
+{#                <a class="nav-item nav-link" href="{{ url_for('login')}}">Login</a>#}
+{#                <a class="nav-item nav-link" href="{{ url_for('register')}}">Register</a>#}
+{#              {% endif %}#}
+    </div>
+    <div class="col-md-4">
+     <div class="col-md-4">
+                <form class="form-inline" method="post" enctype="multipart/form-data">
+                {{ form.hidden_tag() }}
+                    <div class="row">
+                    <div class="col-md-4">{{ form.image_1.label }}</div>
+                    {{ form.image_1(class='form-control', placeholder="Image 1") }}
+                        <div class="col-md-4">{{ form.image_2.label }}</div>
+                    {{ form.image_2(class='form-control', placeholder="Image 2") }}
+                        <div class="col-md-4">{{ form.image_3.label }}</div>
+                    {{ form.image_3(class='form-control', placeholder="Image 3") }}
+                        <div class="col-md-4">{{ form.image_4.label }}</div>
+                    {{ form.image_4(class='form-control', placeholder="Image_4") }}
+                </div>
+                <div class="row">
+                    <div class="col-md-2">{{ form.name.label }}</div>
+                    {{ form.name(class='form-control', placeholder="Name") }}
+                </div>
+                <div class="row">
+                    <div class="col-md-2">{{ form.category_option.label }}</div>
+                    {{ form.category_option(class='form-control', placeholder="Category") }}
+                </div>
+                    <div class="row">
+                    <div class="col-md-2">{{ form.location.label }}</div>
+                    {{ form.location(class='form-control', placeholder="Location") }}
+                </div>
+                     <div class="row">
+                    <div class="col-md-2">{{ form.description.label }}</div>
+                    {{ form.description(class='form-control', placeholder="Product Description") }}
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        {{ form.submit(class='btn btn-primary btn-modify') }}
+                    </div>
+                </div>
+            </form>
+    </div>
+
+
+{% endblock %}
+
+

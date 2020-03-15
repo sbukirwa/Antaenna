@@ -18,8 +18,8 @@
             <a class="navbar-brand " href="{{ url_for('auth.home') }}">Antaenna</a>
         </div>
             <li class="nav navbar-nav navbar-right">
-            <li><a href="{{ url_for('auth.media.upload') }}">Media</a></li>
-            <li></li>
+{#            <li><a href="{{ url_for('auth.media') }}">Media</a></li>#}
+{#            <li></li>#}
             <li>
                 {% if current_user.is_authenticated %}
                     <li><a href="{{ url_for('auth.logout') }}">Log Out</a></li>
@@ -36,4 +36,32 @@
     {{ current_user.username }}
 {% endif %}!
 
+
+<div class="container">
+    <div class="container">
+    <table class = "table table-sm table-condensed table-striped">
+        <thead>
+        <th>Unique Number</th>
+        <th>Name</th>
+        <th>Category</th>
+        <th>Image</th>
+        <th>Edit</th>
+        <th>Delete</th>
+        </thead>
+        <tbody>
+        {% for product in products %}
+        <tr>
+        <td>{{ loop.index }}</td>
+        <td>{{ product.name }}</td>
+        <td>{{ product.category_option }}</td>
+        <td><img src = "{{url_for('static', filename='images/' + product.image_1)}}" width="50", height="30"></td>
+        <td>Edit</td>
+        <td>Delete</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    </div>
+</div>
 {% endblock %}
