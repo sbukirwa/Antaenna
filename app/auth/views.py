@@ -1,11 +1,10 @@
-import base64
 from flask import render_template, flash, redirect, url_for, session, request, logging, send_file
 from . import auth
 from app import db
 from app.models import Seller, Product
 from .forms import LoginForm, RegistrationForm
 from flask_login import login_user, logout_user, login_required, current_user
-# from werkzeug.utils import secure_filename
+
 
 # ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif', 'mp3'])
 
@@ -42,8 +41,10 @@ def login():
 
 @auth.route('/home', methods=["GET", "POST"])
 def home():
-    products = Product.query.all()
-    return render_template('auth/home.html', products=products)
+    seller = current_user
+    product = Product.query.filter_by(seller_id=current_user.id).first()
+    product_dict = dict((col, getattr(product, col)) for col in product.__table__.columns.keys())
+    return render_template('auth/home.html', product_dict = product_dict, product=product)
 
 
 @auth.route('/logout')

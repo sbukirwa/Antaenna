@@ -4,7 +4,7 @@ from app import db, photos
 from app.models import Seller, Product
 from app.models import Seller, Product
 from .forms import AddProductsForm
-from flask_login import current_user, login_user
+from flask_login import current_user
 import secrets
 
 
