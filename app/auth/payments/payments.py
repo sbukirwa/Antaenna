@@ -20,23 +20,51 @@ payments = africastalking.Payment
 #Set your product name
 product_name = "antaenna"
 
-#Set the phone number you want and set it to the international format
-phone_number = "+254795877416"
+def pay(phone_number, currency_code, amount, metadata):
+    """
+    currency is in iso format
+    phone number is in international format
+    metadata is an object {}
+    """
+    #Time to send and we'll handle the rest
+    try:
+        res = payments.mobile_checkout(product_name, phone_number, currency_code, amount, metadata)
+        return res
+        #after a response is confirmed we redirect to the login page
+        """
+        Successful response is like so: 
+        {
+            "requestMetadata": {
+                "agentId": "9029",
+                "productId": "abcd"
+            },
+            "sourceType": "PhoneNumber",
+            "source": "+254795877416",
+            "provider": "Athena",
+            "destinationType": "Wallet",
+            "description": "Received Mobile Checkout funds from +254795877416",
+            "providerChannel": "525900",
+            "direction": "Inbound",
+            "transactionFee": "KES 0.1000",
+            "providerRefId": "ef6ae214-cb5e-4e18-8846-4f739977b60a",
+            "providerMetadata": {
+                "KYCInfo1": "Sample KYCInfo1",
+                "KYCInfo2": "Sample KYCInfo2"
+            },
+            "providerFee": "KES 0.1000",
+            "origin": "ApiRequest",
+            "status": "Success",
+            "productName": "antaenna",
+            "category": "MobileCheckout",
+            "transactionDate": "2020-03-17 22:09:55",
+            "destination": "PaymentWallet",
+            "value": "KES 10.0000",
+            "transactionId": "ATPid_d8ee42c1475f8b3ae0cc2c76902a12b9"
+        }
+        Using https://webhook.site/ to get the payload from AT but should be replaced by an internal server 
+        inorder to read the output and verify success
+        """
+    except Exception as e:
+        print(f"Houston we have a problem {e}")
+        return "Request not successful"
 
-#Set the 3 letter ISO currency code and checkout amount
-currency_code = "KES"
-amount = 10.00
-
-#You can add in your own metadata which will be resent back to you
-#For the final payment notification
-metadata = {
-    "agentId": "9029",
-    "productId": "abcd"
-}
-
-#Time to send and we'll handle the rest
-try:
-    res = payments.mobile_checkout(product_name, phone_number, currency_code, amount, metadata)
-    print(res)
-except Exception as e:
-    print(f"Houston we have a problem {e}")
