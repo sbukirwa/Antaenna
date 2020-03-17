@@ -15,11 +15,14 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
+            <ul>
             <a class="navbar-brand " href="{{ url_for('auth.home') }}">Antaenna</a>
+            </ul>
         </div>
-            <li class="nav navbar-nav navbar-right">
-{#            <li><a href="{{ url_for('auth.media') }}">Media</a></li>#}
-{#            <li></li>#}
+        
+        <ul class="nav navbar-nav navbar-right">
+            <li class="nav-item active"><a href="{{ url_for('auth.home') }}">Dashboard</a></li>
+            <li><a href="#">Messages</a></li>
             <li>
                 {% if current_user.is_authenticated %}
                     <li><a href="{{ url_for('auth.logout') }}">Log Out</a></li>
@@ -31,11 +34,11 @@
 {% endblock %}
 
 {% block page_content %}
-    Hello,
+    <!-- Hello,
 {% if current_user.is_authenticated %}
-    {{ current_user.username }} !
+    {{ current_user.username }} ! -->
 
-
+<h1>{{current_user.username | upper}} Dashboard</h1>
 
 <div class="container">
     <div class="container">
@@ -58,11 +61,39 @@
         <td>{{ product.category_option }}</td>
         <td>
             <img src = "{{url_for('static', filename='images/' + value)}}" width="50", height="30"></td>
-            <td><a href="#">Edit</a></td>
-        <td><a href="#">Delete</a></td>
+            <td><a href="{{url_for('product.updateproduct', id=product.id)}}">Edit</a></td>
+        <td>
+            <a href="{{url_for('product.updateproduct', id=product.id)}}">Delete</a>
+                                <!--Button trigger model-->
+            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal-{{product.id}}">
+                Delete
+              </button>
+        </td>
         </tr>
              
            {% endif %}
+
+
+          <!-- Modal -->
+          <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">{{product.name}}</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <p class="text-danger">Delete {{product.name}}</p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-warning btn-sm" data-dismiss="modal">Cancel</button>
+                  <button type="button" class="btn btn-danger btn-sm">Delete</button>
+                </div>
+              </div>
+            </div>
+          </div>
             {% endfor %}  
            
         </tbody>

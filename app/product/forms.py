@@ -9,7 +9,7 @@ from flask_wtf.file import FileAllowed, FileField, FileRequired
 
 class AddProductsForm(FlaskForm):
     name = StringField("Product Name", validators=[DataRequired()])
-    image_1 = FileField('Image 1', validators=[FileRequired(), FileAllowed(['jpg', 'png', 'gif', 'jpeg'])])
+    image_1 = FileField('Image 1', validators=[FileAllowed(['jpg', 'png', 'gif', 'jpeg'])])
     image_2 = FileField('Image 2', validators=[FileAllowed(['jpg', 'png', 'gif', 'jpeg'])])
     image_3 = FileField('Image 3', validators=[FileAllowed(['jpg', 'png', 'gif', 'jpeg'])])
     image_4 = FileField('Image 4', validators=[FileAllowed(['jpg', 'png', 'gif', 'jpeg'])])

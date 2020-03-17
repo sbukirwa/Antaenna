@@ -31,7 +31,7 @@
 {% block page_content %}
 
      <div class="page-header">
-        <h1>Add Product</h1>
+        <h1>Update Product</h1>
     {% if current_user.is_authenticated %}
              {{ current_user.username }}
 {% endif %}!
@@ -48,29 +48,29 @@
                 <form class="form-inline" method="post" enctype="multipart/form-data">
                 {{ form.hidden_tag() }}
                 <div class="row">
-                    <div class="col-md-2">{{ form.name.label }}</div>
+                    <div class="col-md-12">{{ form.name.label }}</div>
                     {{ form.name(class='form-control', placeholder="Name") }}
                 </div>
                 <div class="row">
-                    <div class="col-md-2">{{ form.category_option.label }}</div>
+                    <div class="col-md-12">{{ form.category_option.label }}</div>
                     {{ form.category_option(class='form-control', placeholder="Category") }}
                 </div>
                     <div class="row">
-                    <div class="col-md-2">{{ form.location.label }}</div>
+                    <div class="col-md-12">{{ form.location.label }}</div>
                     {{ form.location(class='form-control', placeholder="Location") }}
                 </div>
                      <div class="row">
-                    <div class="col-md-2">{{ form.description.label }}</div>
+                    <div class="col-md-12">{{ form.description.label }}</div>
                     {{ form.description(class='form-control', placeholder="Product Description") }}
                 </div>
                 <div class="row">
-                    <div class="col-md-4">{{ form.image_1.label }}</div>
+                    <div class="col-md-4", required>{{ form.image_1.label }}</div>
                     {{ form.image_1(class='form-control', placeholder="Image 1") }}
-                        <div class="col-md-4">{{ form.image_2.label }}</div>
+                        <div class="col-md-4", required>{{ form.image_2.label }}</div>
                     {{ form.image_2(class='form-control', placeholder="Image 2") }}
-                        <div class="col-md-4">{{ form.image_3.label }}</div>
+                        <div class="col-md-4", required>{{ form.image_3.label }}</div>
                     {{ form.image_3(class='form-control', placeholder="Image 3") }}
-                        <div class="col-md-4">{{ form.image_4.label }}</div>
+                        <div class="col-md-4", required>{{ form.image_4.label }}</div>
                     {{ form.image_4(class='form-control', placeholder="Image_4") }}
                 </div>
                 <div class="col-md-6">
@@ -83,5 +83,3 @@
 
 
 {% endblock %}
-
-
