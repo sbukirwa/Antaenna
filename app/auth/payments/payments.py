@@ -18,7 +18,7 @@ africastalking.initialize(username, api_key)
 payments = africastalking.Payment
 
 #Set your product name
-product_name = "antaenna"
+product_name = "Antaenna"
 
 def pay(phone_number, currency_code, amount, metadata):
     """
@@ -69,4 +69,8 @@ def pay(phone_number, currency_code, amount, metadata):
         return "Request not successful"
 
 if __name__ == '__main__':
-    pay("+254795877416", "KSH", "10", "{'Product':'Shoes'}")
+    metadata =  {
+                "agentId": "9029",
+                "productId": "abcd"
+            }
+    pay("+256778607727", "UGX", "3500", metadata)
