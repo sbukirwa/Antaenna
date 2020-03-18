@@ -6,6 +6,7 @@ from .forms import AddProductsForm
 from flask_login import current_user
 import secrets
 from app import config
+from werkzeug.utils import secure_filename
 
 
 @product.route('/addproduct', methods=['GET', 'POST'])
@@ -96,5 +97,5 @@ def deleteproduct(id):
             print(e)
         db.session.delete(product)
         db.session.commit()
-        return redirect(url_for('auth.home'))
+        return redirect(url_for('auth.homepage'))
     return redirect(url_for('auth.homepage'))

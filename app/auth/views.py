@@ -1,8 +1,8 @@
 from flask import render_template, flash, redirect, url_for, session, request, logging, send_file
 from . import auth
 from app import db
-from app.models import Seller, Product
-from .forms import LoginForm, RegistrationForm
+from app.models import Seller, Product, Contact
+from .forms import LoginForm, RegistrationForm, ContactForm
 from flask_login import login_user, logout_user, login_required, current_user
 
 
@@ -50,6 +50,22 @@ def home():
 @auth.route('/homepage', methods=["GET", "POST"])
 def homepage():
     return render_template('auth/homepage.html')
+
+
+@auth.route('/contact', methods=["GET", "POST"])
+def contact():
+    form = ContactForm()
+    session['cont'] = 'active'
+    if form.validate_on_submit():
+        session['name'] = form.name.data
+        session['email'] = form.email.data
+        session['phone'] = form.phone.data
+        session['message'] = form.message.data
+        send_email('soniabukirwa@gmail.com', 'Seller Comment', 'email/user', name=session.get('name'),
+                   email=session.get('email'), phone=session.get('phone'), message=session.get('message'))
+        flash('Message sent successfully', )
+        return redirect(url_for('auth.homepage'))
+    return render_template('auth/contact.html', form=form, cont=session.get('cont'))
 
 
 @auth.route('/logout')

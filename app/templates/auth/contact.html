@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block navbar %}
+<div class="navbar navbar-inverse" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle"
+                    data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand " href="{{ url_for('auth.home') }}">Antaenna</a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                    <li><a href = "{{ url_for('auth.homepage') }}">Add Store</a></li>
+                    <li class="nav-item active"><a href="{{ url_for('auth.contact') }}">Contact Us</a></li>
+                    <li><a href="{{ url_for('auth.logout') }}">Log Out</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
+{% block page_content %}
+
+<div class="container page-header">
+    <h1>Contact Us</h1>
+</div>
+
+
+<div class="col-md-6">
+    <form method="post">
+    <div class="row">
+        <div class="row">
+            <div class="col-md-2">{{ form.name.label }}</div>
+            {{ form.name(class='form-control', placeholder="Name") }}
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-2">{{ form.email.label }}</div>
+            {{ form.email(class='form-control', placeholder="Email") }}
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-2">{{ form.phone.label }}</div>
+            {{ form.phone(class='form-control', placeholder="Phone") }}
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-2">{{ form.message.label }}</div>
+            {{ form.message(class='form-control', placeholder="Message", cols="30",rows="7") }}
+        </div>
+        <br>
+        <div class="col-md-12">
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Send Message</button>
+            </div>
+        </div>
+    </div>
+</form>
+</div>
+
+{% endblock %}

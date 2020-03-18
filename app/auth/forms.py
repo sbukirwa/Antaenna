@@ -1,9 +1,9 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, BooleanField, SubmitField, FloatField, MultipleFileField, \
-    SelectField, FileField, TextAreaField
+    SelectField, FileField, TextAreaField, IntegerField
 from wtforms.validators import DataRequired, Length, Regexp, EqualTo, Email
 from wtforms import ValidationError
-from ..models import Seller
+from ..models import Seller, Contact
 from datetime import datetime
 
 
@@ -31,6 +31,14 @@ class LoginForm(FlaskForm):
     password_hash = PasswordField("Password", validators=[DataRequired()])
     remember_me = BooleanField("Keep me logged in")
     submit = SubmitField("Log In")
+
+
+class ContactForm(FlaskForm):
+    name = StringField("Name", validators=[DataRequired()])
+    email = StringField('Email', validators=[DataRequired(), Length(1, 64), Email()])
+    phone = IntegerField("Phone", validators=[DataRequired()])
+    message = TextAreaField("Message", validators=[DataRequired()])
+    submit = SubmitField("Submit")
 
 
 

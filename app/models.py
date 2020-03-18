@@ -79,3 +79,15 @@ class Product(db.Model):
 
     def __repr__(self):
         return '<Product %r>' % self.name
+
+
+class Contact(db.Model):
+    __tablename__ = 'contacts'
+    id = db.Column(db.Integer, primary_key=True)
+    full_name = db.Column(db.String(300))
+    telephone = db.Column(db.String(20))
+    email = db.Column(db.String(120))
+    comment = db.Column(db.Text(140))
+
+    def __repr__(self):
+        return '<Contact %r>' % self.full_name
