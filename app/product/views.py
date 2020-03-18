@@ -9,6 +9,12 @@ from app import config
 from werkzeug.utils import secure_filename
 
 
+@product.route('/')
+def home():
+    products = Product.query.filter(Product.pub_date)
+    return render_template('products/home.html', products=products)
+
+
 @product.route('/addproduct', methods=['GET', 'POST'])
 def addproduct():
     form = AddProductsForm(request.form)
