@@ -76,3 +76,25 @@ def updateproduct(id):
     form.image_3.data = product.image_3
     form.image_4.data = product.image_4
     return render_template('products/updateproduct.html', form=form, product=product)
+
+
+
+@product.route('/deleteproduct/<int:id>', methods=["POST"])
+def deleteproduct(id):
+    product = Product.query.get_or_404(id)
+    if request.method == "POST":
+        # form.name.data = product.name
+        # product.category_option = form.category_option.data
+        # product.location = form.location.data
+        # product.description = form.description.data
+        try:
+            os.unlink(os.pathjoin(current_app.root_path, "app/static/images/" + product.image_1))
+            os.unlink(os.pathjoin(current_app.root_path, "app/static/images/" + product.image_2))
+            os.unlink(os.pathjoin(current_app.root_path, "app/static/images/" + product.image_3))
+            os.unlink(os.pathjoin(current_app.root_path, "app/static/images/" + product.image_4))
+        except Exception as e:
+            print(e)
+        db.session.delete(product)
+        db.session.commit()
+        return redirect(url_for('auth.home'))
+    return redirect(url_for('auth.homepage'))

@@ -33,7 +33,7 @@ def login():
             login_user(seller, form.remember_me.data)
             next = request.args.get('next')
             if next is None or not next.startwith('/product/addproduct'):
-                next = url_for('product.addproduct')
+                next = url_for('auth.homepage')
             return redirect(next)
         flash("Invalid username or password.")   # write the flash code in the template
     return render_template('auth/login.html', form=form)
@@ -45,6 +45,11 @@ def home():
     product = Product.query.filter_by(seller_id=current_user.id).first()
     product_dict = dict((col, getattr(product, col)) for col in product.__table__.columns.keys())
     return render_template('auth/home.html', product_dict = product_dict, product=product)
+
+
+@auth.route('/homepage', methods=["GET", "POST"])
+def homepage():
+    return render_template('auth/homepage.html')
 
 
 @auth.route('/logout')
