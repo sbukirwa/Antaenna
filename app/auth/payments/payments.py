@@ -68,3 +68,5 @@ def pay(phone_number, currency_code, amount, metadata):
         print(f"Houston we have a problem {e}")
         return "Request not successful"
 
+if __name__ == '__main__':
+    pay("+254795877416", "KSH", "10", "{'Product':'Shoes'}")
